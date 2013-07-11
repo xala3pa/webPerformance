@@ -16,4 +16,7 @@ Alvaro Salazar (2013)
 
 License
 -------
-MIT
+
+Copyright (c) 2013 Alvaro Salazar salazar3pa@gmail.com
+
+See the file LICENSE for copying permission.
