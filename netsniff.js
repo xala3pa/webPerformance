@@ -76,7 +76,7 @@ function createHAR(address, title, startTime, resources)
         log: {
             version: '0.1',
             creator: {
-                name: "ticketbis.com",
+                name: "xala3pa",
                 version: phantom.version.major + '.' + phantom.version.minor +
                     '.' + phantom.version.patch
             },
