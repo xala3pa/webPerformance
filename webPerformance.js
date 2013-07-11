@@ -5,21 +5,21 @@ var sys = require('util'),
     program = require('commander');
 
 var fileName; //File Name to persist data in har format
-var maxKBs = 80000;  //Maximun bandwith to test
+var maxKBs = 80000;  //Maximun bandwith to test in kbs
 
-//TODO: Coercion check type data (Integer)¡
+//TODO: Coercion | check type data (Integer)
 //Command line interface
 program
   .version('0.0.1')
   .option('-u, --url <url>', 'Add url to test')
-  .option('-m, --minimun [kBs]', 'Add minimun connection','80')
-  .option('-s, --step [kBs]', 'Add step','800');
+  .option('-m, --minimun [kbps]', 'Add minimun connection','4000')
+  .option('-s, --step [kbps]', 'Add step','4000');
 
 program.on('--help', function(){
     console.log('  Examples:');
     console.log('');
-    console.log('    $ nodejs webPerformance.js -u http://www.google.com -m 10');
-    console.log('    $ nodejs webPerformance.js -u http://www.google.com -m 10 -s 10');
+    console.log('    $ nodejs webPerformance.js -u https://github.com/xala3pa/webPerformance -m 4000');
+    console.log('    $ nodejs webPerformance.js -u https://github.com/xala3pa/webPerformance -m 4000 -s 4000');
     console.log('');
 });
 
@@ -34,9 +34,13 @@ var bar = new ProgressBar('  Testing Performance [:bar] :percent', {
   });
 
 while (maxKBs >= program.minimun) {          
+    //increment progress bar
     bar.tick(1);            
-    fileName = "performace" + maxKBs + ".har";
+    //output file name
+    fileName = "performance" + maxKBs + ".har";
+    //Execute synchronously process tasks
     execSync("phantomjs netsniff.js " + program.url + " " + fileName );
+
     maxKBs = maxKBs - program.step;  
 }
 
