@@ -41,14 +41,16 @@ while (maxKbs >= program.minimun) {
     //output file name
     fileName = "performance_" + maxKbs + "_" + program.interface + ".har";
     //Set bandwith using wonderShaper
-    console.log("sudo wondershaper -a " + program.interface + " -d " + maxKbs + " -u 8000");
     execSync("sudo wondershaper -a " + program.interface + " -d " + maxKbs + " -u 8000");
     //Execute synchronously process tasks
     execSync("phantomjs netsniff.js " + program.url + " " + fileName);
     //clear all traffic shaping from that interface.
     execSync("sudo wondershaper -c -a " + program.interface);
+
  
     maxKbs = maxKbs - program.step;  
 }
+
+process.exit();
 
 

@@ -1,0 +1,32 @@
+{
+  "name": "webPerformance",
+  "preferGlobal": true,
+  "version": "0.1.0",
+  "author": "Alvaro Salazar <salazar3pa@gmail.com>",
+  "description": "Simple Tool to test page performance with differents bandwith",
+  "contributors": [
+    {
+      "name": "Alvaro Salazar",
+      "email": "salazar3pa@gmail.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xala3pa/webPerformance.git"
+  },
+  "keywords": [
+    "webPerformance",
+    "performance",
+    "bandwith",
+    "connection",
+    "test"
+  ],
+  "dependencies" : {
+    "colors"     :  "*",
+    "exec-sync"  :  "0.1.6",
+    "progress"   :  "1.0.0",
+    "phantomjs"  :  "1.9.1-0",
+    "commander"  :  "1.3.0"
+  },
+  "license": "MIT"
+}
