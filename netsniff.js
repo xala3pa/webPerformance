@@ -108,7 +108,7 @@ if (system.args.length === 1) {
 
     fileName = system.args[2];
 
-    page.onLoadStarted = function () {
+    page.onLoadStarted = function () {        
         page.startTime = new Date();
     };
 
@@ -137,7 +137,7 @@ if (system.args.length === 1) {
             console.log('FAIL to load the address');
             phantom.exit(1);
         } else {
-            page.endTime = new Date();
+            page.endTime = new Date();            
             page.title = page.evaluate(function () {
                 return document.title;
             });

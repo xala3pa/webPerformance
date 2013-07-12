@@ -2,10 +2,11 @@
 var sys = require('util'),
     execSync = require("exec-sync"),
     ProgressBar = require('progress'),
+    phantomjs = require('phantomjs'),
     program = require('commander');
 
 var fileName; //File Name to persist data in har format
-var maxKBs = 80000;  //Maximun bandwith to test in kbs
+var maxKbs = 80000;  //Maximun bandwith to test in kbs
 
 //TODO: Coercion | check type data (Integer)
 //Command line interface
@@ -13,13 +14,14 @@ program
   .version('0.0.1')
   .option('-u, --url <url>', 'Add url to test')
   .option('-m, --minimun [kbps]', 'Add minimun connection','4000')
-  .option('-s, --step [kbps]', 'Add step','4000');
+  .option('-s, --step [kbps]', 'Add step','4000')
+  .option('-i, --interface [interface]', 'Set the interface','eth0');
 
 program.on('--help', function(){
     console.log('  Examples:');
     console.log('');
     console.log('    $ nodejs webPerformance.js -u https://github.com/xala3pa/webPerformance -m 4000');
-    console.log('    $ nodejs webPerformance.js -u https://github.com/xala3pa/webPerformance -m 4000 -s 4000');
+    console.log('    $ nodejs webPerformance.js -u https://github.com/xala3pa/webPerformance -i wlan0 -m 4000 -s 4000');
     console.log('');
 });
 
@@ -30,18 +32,23 @@ var bar = new ProgressBar('  Testing Performance [:bar] :percent', {
       complete: '='
     , incomplete: ' '
     , width: 50
-    , total: maxKBs / program.step
+    , total: maxKbs / program.step
   });
 
-while (maxKBs >= program.minimun) {          
+while (maxKbs >= program.minimun) {          
     //increment progress bar
     bar.tick(1);            
     //output file name
-    fileName = "performance" + maxKBs + ".har";
+    fileName = "performance_" + maxKbs + "_" + program.interface + ".har";
+    //Set bandwith using wonderShaper
+    console.log("sudo wondershaper -a " + program.interface + " -d " + maxKbs + " -u 8000");
+    execSync("sudo wondershaper -a " + program.interface + " -d " + maxKbs + " -u 8000");
     //Execute synchronously process tasks
-    execSync("phantomjs netsniff.js " + program.url + " " + fileName );
-
-    maxKBs = maxKBs - program.step;  
+    execSync("phantomjs netsniff.js " + program.url + " " + fileName);
+    //clear all traffic shaping from that interface.
+    execSync("sudo wondershaper -c -a " + program.interface);
+ 
+    maxKbs = maxKbs - program.step;  
 }
 
 
