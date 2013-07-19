@@ -13,15 +13,15 @@ var maxKbs = 80000;  //Maximun bandwith to test in kbs
 program
   .version('0.0.1')
   .option('-u, --url <url>', 'Add url to test')
-  .option('-m, --minimun [kbps]', 'Add minimun connection','4000')
+  .option('-m, --minimun [kbps]', 'Add minimun bandwith connection','4000')
   .option('-s, --step [kbps]', 'Add step','4000')
   .option('-i, --interface [interface]', 'Set the interface','eth0');
 
 program.on('--help', function(){
     console.log('  Examples:');
     console.log('');
-    console.log('    $ nodejs webPerformance.js -u https://github.com/xala3pa/webPerformance -m 4000');
-    console.log('    $ nodejs webPerformance.js -u https://github.com/xala3pa/webPerformance -i wlan0 -m 4000 -s 4000');
+    console.log('    $ node webPerformance.js -u https://github.com/xala3pa/webPerformance -m 4000');
+    console.log('    $ node webPerformance.js -u https://github.com/xala3pa/webPerformance -i wlan0 -m 4000 -s 4000');
     console.log('');
 });
 
