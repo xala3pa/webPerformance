@@ -1,7 +1,7 @@
 {
   "name": "webperformance",
   "preferGlobal": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Simple Tool to test page performance with differents bandwith",
   "main": "webPerformance.js",
   "author": {
